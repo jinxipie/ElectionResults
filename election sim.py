@@ -51,18 +51,20 @@ for distr in range(numdists):
     partyvotesdict = {}
     pvt = 0
     for entry in parties:
-        randnum = numpy.random.normal(loc=0.0,scale=20.0,size=None)
+        randnum = numpy.random.normal(loc=0.0,scale=5.0,size=None)
         if entry == coalea:
-            tally = (.5*parties[entry]+(.5*(apprrating)*parties[entry]/100))+randnum+(aqlcount-4)
+            tally = (.5*parties[entry]+(apprrating)*parties[entry]/100)+randnum+(aqlcount-4)
         elif entry in supply:
-            tally = (.5*parties[entry]+(.5*(apprrating)*parties[entry]/100))+randnum+(aqlcount-4)
+            tally = (.5*parties[entry]+(apprrating)*parties[entry]/100)+randnum+(aqlcount-4)
         else:
-            tally = (.5*parties[entry]+(.5*(100-apprrating)*parties[entry]/100))+randnum+(aqlcount-4)*-1
+            tally = (.5*parties[entry]+(100-apprrating)*parties[entry]/100)+randnum+(aqlcount-4)*-1
         if tally < 0:
             tally = 0
             print("tally less than 0")
         partyvotesdict[entry] = tally
         pvt += tally
+        if pvt == 0:
+            pvt = 1
     print("Votes for district "+str(whichdistis)+" below")
     listforprint[whichdistis].append("District "+str(whichdistis))
     for entry in partyvotesdict:
